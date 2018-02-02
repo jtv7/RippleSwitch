@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RippleSwitch">
+        <attr name="rs_checked" format="boolean"/>
+        <attr name="rs_checked_color" format="color" />
+        <attr name="rs_unchecked_color" format="color" />
+    </declare-styleable>
+</resources>
