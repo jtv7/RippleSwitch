@@ -7,6 +7,8 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.RectF;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -21,6 +23,9 @@ public class RippleSwitch extends View implements Checkable {
 
     private static final int UNCHECKED_COLOR = Color.parseColor("#2C2C2C");
     private static final int CHECKED_COLOR = Color.WHITE;
+
+    private static final String EXTRA_SUPER = "extra_super";
+    private static final String EXTRA_CHECKED = "extra_checked";
 
     private static final int DEFAULT_WIDTH = 80;
     private static final int DEFAULT_HEIGHT = 40;
@@ -120,6 +125,22 @@ public class RippleSwitch extends View implements Checkable {
 
         rectF.set(0, 0, getWidth(), getHeight());
         RippleSwitchUtil.drawSwitch(canvas, rectF, RippleSwitchUtil.ResizeType.AspectFit, uncheckedColor, checkedColor, backgroundColor, knobScaleAnimatedValueLeft, knobScaleAnimatedValueLeft, knobScaleAnimatedValueRight, knobScaleAnimatedValueRight);
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Bundle state = new Bundle();
+        state.putParcelable(EXTRA_SUPER, super.onSaveInstanceState());
+        state.putBoolean(EXTRA_CHECKED, mChecked);
+        return state;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable parcel) {
+        Bundle state = (Bundle) parcel;
+        super.onRestoreInstanceState(state.getParcelable(EXTRA_SUPER));
+        mChecked = state.getBoolean(EXTRA_CHECKED);
+        ensureCorrectValues();
     }
 
     private ValueAnimator getScaleAnimator() {
