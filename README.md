@@ -46,7 +46,7 @@ Default selection can be set using:
 Setting colors:
 ```xml
 <com.jtv7.rippleswitchlib.RippleSwitch
-  app:rs_checked_color="#FFFFFF"/>
+  app:rs_checked_color="#FFFFFF"
   app:rs_unchecked_color="#2C2C2C"/>
 ```
 
